@@ -266,7 +266,7 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors-service.mivi-multihal \
+    android.hardware.sensors-service.multihal \
     sensors.dynamic_sensor_hal
 
 PRODUCT_COPY_FILES += \
@@ -281,6 +281,7 @@ PRODUCT_COPY_FILES += \
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
+    hardware/interfaces \
     vendor/qcom/opensource/usb/etc
 
 # Telephony
