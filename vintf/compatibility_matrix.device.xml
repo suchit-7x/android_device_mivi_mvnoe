@@ -1,30 +1,21 @@
 <compatibility-matrix version="8.0" type="framework">
     <hal format="aidl" optional="true">
-        <name>vendor.xiaomi.hardware.fx.tunnel</name>
+        <name>android.frameworks.sensorservice</name>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>vendor.goodix.hardware.biometrics.fingerprint.cap</name>
         <interface>
-            <name>IMiFxTunnel</name>
+            <name>IGoodixFingerprintDaemon</name>
             <instance>default</instance>
         </interface>
     </hal>
     <hal format="aidl" optional="true">
-        <name>vendor.xiaomi.hardware.micharge</name>
-        <version>1-2</version>
-        <interface>
-            <name>IMiCharge</name>
-            <instance>default</instance>
-        </interface>
+        <name>vendor.qti.hardware.sigma_miracast_aidl</name>
     </hal>
     <hal format="aidl" optional="true">
-        <name>vendor.xiaomi.hardware.mlipay</name>
+        <name>vendor.qti.qccsyshal_aidl</name>
         <interface>
-            <name>IMlipayService</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="aidl" optional="true">
-        <name>com.fingerprints.fpc.extension</name>
-        <interface>
-            <name>IFpcExtension</name>
+            <name>IQccsyshal</name>
             <instance>default</instance>
         </interface>
     </hal>
