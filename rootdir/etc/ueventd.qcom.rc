@@ -621,6 +621,4 @@ subsystem mem_buf_vm
 
 # IPA Events
 /dev/ipa_events         0660   radio      radio
-
-# Battery
-/sys/class/qcom-battery                                 input_suspend                   0660    system  system
+/dev/block/by-name/factory			0660	system  system

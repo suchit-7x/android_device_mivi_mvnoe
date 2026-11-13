@@ -103,6 +103,7 @@ on early-boot
     # set RLIMIT_MEMLOCK to 64KB
     setrlimit 8 65536 65536
     exec u:r:vendor_qti_init_shell:s0 -- /vendor/bin/init.qcom.early_boot.sh
+    exec u:r:vendor_qti_init_shell:s0 -- /vendor/bin/init.qti.can.sh
     setprop ro.sf.lcd_density ${vendor.display.lcd_density}
 
     chown system system /mnt/vendor/persist/data/pfm/licenses
@@ -250,21 +251,6 @@ on boot
     # limit discard size to 128MB in order to avoid long IO latency
     write /sys/block/sda/queue/discard_max_bytes 134217728
 
-    #modify permission of block_size node and stm node
-    chown -h vendor_qdss /sys/bus/coresight/devices/coresight-tmc-etr/block_size
-    chmod 660 /sys/bus/coresight/devices/coresight-tmc-etr/block_size
-    chown -h vendor_qdss /sys/bus/coresight/reset_source_sink
-    chmod 660 /sys/bus/coresight/reset_source_sink
-
-    chown -h vendor_qdss /sys/bus/coresight/devices/coresight-tmc-etr/out_mode
-    chmod 777 /sys/bus/coresight/devices/coresight-tmc-etr/out_mode
-    chown -h vendor_qdss /sys/bus/coresight/devices/coresight-tmc-etr/enable_sink
-    chmod 777 /sys/bus/coresight/devices/coresight-tmc-etr/enable_sink
-    chown -h vendor_qdss /sys/bus/coresight/devices/coresight-stm/enable_source
-    chmod 777 /sys/bus/coresight/devices/coresight-stm/enable_source
-    chown -h vendor_qdss /sys/bus/coresight/devices/coresight-modem-diag/enable_source
-    chmod 777 /sys/bus/coresight/devices/coresight-modem-diag/enable_source
-
 # msm specific files that need to be created on /data
 on post-fs-data
     mkdir /data/vendor/misc 01771 system system
@@ -293,6 +279,41 @@ on post-fs-data
     #Create folder of camera
     mkdir /data/vendor/camera 0770 camera camera
 
+#add by guozuoyu for RPT-76 20241024 camera info start
+    chown camera camera /sys/debug_control/hs_cam_msn
+    mkdir /data/vendor/cameraserver 0770 camera camera
+    mkdir /data/vendor/cameraserver/hwinfo 0770 camera camera
+
+    # niuzhiqiang add camera Q5008_bf30a2_bch sensor for q5008 20241114 begin
+    chmod 0664 /sys/devices/virtual/sensordrv/kd_camera_hw/camera_vga_luma_value
+    chown system system /sys/devices/virtual/sensordrv/kd_camera_hw/camera_vga_luma_value
+    # niuzhiqiang add camera Q5008_bf30a2_bch sensor for q5008 20241114 end
+    symlink /sys/cam_hwinfo/cam_back_lens_efuse /data/vendor/cameraserver/hwinfo/cam_back_lens_efuse
+    symlink /sys/cam_hwinfo/cam_back_lens_mfr /data/vendor/cameraserver/hwinfo/cam_back_lens_mfr
+    symlink /sys/cam_hwinfo/cam_back_lens_otp_status /data/vendor/cameraserver/hwinfo/cam_back_lens_otp_status
+    symlink /sys/cam_hwinfo/cam_depth_lens_efuse /data/vendor/cameraserver/hwinfo/cam_depth_lens_efuse
+    symlink /sys/cam_hwinfo/cam_depth_lens_mfr /data/vendor/cameraserver/hwinfo/cam_depth_lens_mfr
+    symlink /sys/cam_hwinfo/cam_depth_lens_otp_status /data/vendor/cameraserver/hwinfo/cam_depth_lens_otp_status
+    symlink /sys/cam_hwinfo/cam_front_lens_efuse /data/vendor/cameraserver/hwinfo/cam_front_lens_efuse
+    symlink /sys/cam_hwinfo/cam_front_lens_mfr /data/vendor/cameraserver/hwinfo/cam_front_lens_mfr
+    symlink /sys/cam_hwinfo/cam_front_lens_otp_status /data/vendor/cameraserver/hwinfo/cam_front_lens_otp_status
+    symlink /sys/cam_hwinfo/cam_macro_lens_efuse /data/vendor/cameraserver/hwinfo/cam_macro_lens_efuse
+    symlink /sys/cam_hwinfo/cam_macro_lens_mfr /data/vendor/cameraserver/hwinfo/cam_macro_lens_mfr
+    symlink /sys/cam_hwinfo/cam_macro_lens_otp_status /data/vendor/cameraserver/hwinfo/cam_macro_lens_otp_status
+
+    symlink /sys/cam_hwinfo/cam_iris_lens_efuse /data/vendor/cameraserver/hwinfo/cam_iris_lens_efuse
+    symlink /sys/cam_hwinfo/cam_iris_lens_mfr /data/vendor/cameraserver/hwinfo/cam_iris_lens_mfr
+    symlink /sys/cam_hwinfo/cam_iris_lens_otp_status /data/vendor/cameraserver/hwinfo/cam_back_lens_otp_status
+    symlink /sys/cam_hwinfo/cam_tele_lens_efuse /data/vendor/cameraserver/hwinfo/cam_tele_lens_efuse
+    symlink /sys/cam_hwinfo/cam_tele_lens_mfr /data/vendor/cameraserver/hwinfo/cam_tele_lens_mfr
+    symlink /sys/cam_hwinfo/cam_tele_lens_otp_status /data/vendor/cameraserver/hwinfo/cam_tele_lens_otp_status
+    symlink /sys/cam_hwinfo/cam_tof_lens_efuse /data/vendor/cameraserver/hwinfo/cam_tof_lens_efuse
+    symlink /sys/cam_hwinfo/cam_tof_lens_mfr /data/vendor/cameraserver/hwinfo/cam_tof_lens_mfr
+    symlink /sys/cam_hwinfo/cam_tof_lens_otp_status /data/vendor/cameraserver/hwinfo/cam_tof_lens_otp_status
+    symlink /sys/cam_hwinfo/cam_wide_angle_lens_efuse /data/vendor/cameraserver/hwinfo/cam_wide_angle_lens_efuse
+    symlink /sys/cam_hwinfo/cam_wide_angle_lens_mfr /data/vendor/cameraserver/hwinfo/cam_wide_angle_lens_mfr
+    symlink /sys/cam_hwinfo/cam_wide_angle_lens_otp_status /data/vendor/cameraserver/hwinfo/cam_wide_angle_lens_otp_status
+#add by guozuoyu for RPT-76 20241024 camera info end
 
     #Create directory for tftp
     mkdir /data/vendor/tombstones 0771 system system
@@ -301,29 +322,6 @@ on post-fs-data
     mkdir /data/vendor/ramdump 0771 root system
     mkdir /data/vendor/bluetooth 0770 bluetooth bluetooth
     mkdir /data/vendor/ramdump/bluetooth 0770 bluetooth bluetooth
-
-    #Create the directories used by the subsystem_ramdump
-    mkdir /data/vendor/bsplog 0771 root system
-    mkdir /data/vendor/bsplog/modem 0771 root system
-    mkdir /data/vendor/bsplog/modem/ssr_dump 0771 root system
-    mkdir /data/vendor/bsplog/camera 0771 root system
-    mkdir /data/vendor/bsplog/camera/ssr_dump 0771 root system
-    mkdir /data/vendor/bsplog/audio 0771 root system
-    mkdir /data/vendor/bsplog/audio/ssr_dump 0771 root system
-    mkdir /data/vendor/bsplog/sensor 0771 root system
-    mkdir /data/vendor/bsplog/sensor/ssr_dump 0771 root system
-    mkdir /data/vendor/bsplog/secure 0771 root system
-    mkdir /data/vendor/bsplog/secure/ssr_dump 0771 root system
-    mkdir /data/vendor/bsplog/wlan 0771 root system
-    mkdir /data/vendor/bsplog/wlan/ssr_dump 0771 root system
-    mkdir /data/vendor/bsplog/other 0771 root system
-    mkdir /data/vendor/bsplog/other/ssr_dump 0771 root system
-
-    #enabled modem/adsp/cdsp/wpss coredump
-    write sys/class/remoteproc/remoteproc3/coredump  enabled
-    write sys/class/remoteproc/remoteproc2/coredump  enabled
-    write sys/class/remoteproc/remoteproc1/coredump  enabled
-    write sys/class/remoteproc/remoteproc0/coredump  enabled
 
     # Create the directories used by the Wireless subsystem
     mkdir /data/vendor/wifi 0770 wifi wifi
@@ -476,6 +474,22 @@ service iop /system/vendor/bin/iop
     disabled
     socket iop seqpacket 0666 root system
 
+service qcomsysd /system/vendor/bin/qcom-system-daemon
+    class main
+    user root
+    group root diag oem_2901
+    disabled
+
+# Not launch qcomsysd process in USER BUILD
+on property:persist.vendor.qcomsysd.enabled=1 && property:ro.build.type=userdebug
+    enable qcomsysd
+
+on property:persist.vendor.qcomsysd.enabled=1 && property:ro.build.type=eng
+    enable qcomsysd
+
+on property:persist.vendor.qcomsysd.enabled=0
+    stop qcomsysd
+
 service vendor.ssr_setup /system/vendor/bin/ssr_setup
     oneshot
     disabled
@@ -564,6 +578,11 @@ on property:vendor.media.target.version=*
 on property:vendor.media.target_variant=*
     setprop ro.media.xml_variant.codecs ${vendor.media.target_variant}
     setprop ro.media.xml_variant.codecs_performance ${vendor.media.target_variant}
+
+service qcom-c_core-sh  /vendor/bin/init.qcom.class_core.sh
+    class core
+    user root
+    oneshot
 
 service qcom-c_main-sh /vendor/bin/init.class_main.sh
     class main
@@ -728,6 +747,11 @@ service qcom-sh /vendor/bin/init.qcom.sh
     user root
     group root system radio
     oneshot
+# Remove since is deprecated but throws AVC denial.
+# service crashdata-sh /vendor/bin/init.qcom.crashdata.sh
+#    class late_start
+#    user root
+#    oneshot
 
 service qcom-post-boot /vendor/bin/init.qcom.post_boot.sh
     class late_start
@@ -736,8 +760,28 @@ service qcom-post-boot /vendor/bin/init.qcom.post_boot.sh
     disabled
     oneshot
 
+service qti-testscripts /system/bin/sh /product/etc/init.qcom.testscripts.sh
+    class late_start
+    user root
+    disabled
+    oneshot
+    seclabel u:r:qti-testscripts:s0
+
+service wifi-sdio-on /vendor/bin/init.qcom.sdio.sh
+    class late_start
+    group wifi inet
+    disabled
+    oneshot
+
+service wifi-crda /vendor/bin/init.crda.sh
+   class late_start
+   user root
+   disabled
+   oneshot
+
 on property:sys.boot_completed=1
     start qcom-post-boot
+    start qti-testscripts
 
 on property:ro.vendor.ril.mbn_copy_completed=1
     write /data/vendor/radio/copy_complete 1
