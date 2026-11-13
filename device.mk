@@ -281,7 +281,6 @@ PRODUCT_COPY_FILES += \
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
-    hardware/mivi \
     vendor/qcom/opensource/usb/etc
 
 # Telephony

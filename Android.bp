@@ -4,9 +4,6 @@
 //
 
 soong_namespace {
-    imports: [
-        "hardware/xiaomi"
-    ],
 }
 
 install_symlink {
