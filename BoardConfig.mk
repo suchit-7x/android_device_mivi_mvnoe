@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-DEVICE_PATH := device/xiaomi/flame
+DEVICE_PATH := device/mivi/mvnoe
 
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
@@ -42,7 +42,7 @@ BOARD_SUPPORTS_SOUND_TRIGGER := true
 BOARD_USES_ALSA_AUDIO := true
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := flame
+TARGET_BOOTLOADER_BOARD_NAME := mvnoe
 TARGET_NO_BOOTLOADER := true
 
 # Boot Image
@@ -80,7 +80,7 @@ BOARD_BOOTCONFIG := \
 	androidboot.vendor.qspa=true
 
 # Kernel (prebuilt)
-PREBUILT_PATH := device/xiaomi/flame-kernel
+PREBUILT_PATH := device/mivi/mvnoe-kernel
 TARGET_NO_KERNEL_OVERRIDE := true
 TARGET_KERNEL_SOURCE := $(PREBUILT_PATH)/kernel-headers
 TARGET_KERNEL_VERSION := 6.6
@@ -217,4 +217,4 @@ WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Vendor
-include vendor/xiaomi/flame/BoardConfigVendor.mk
+include vendor/mivi/mvnoe/BoardConfigVendor.mk

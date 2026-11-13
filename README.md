@@ -1,1 +1,1 @@
-# android_device_xiaomi_flame
+# android_device_mivi_mvnoe

@@ -161,9 +161,9 @@ PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey
 
 # Fingerprint
-$(call soong_config_set,XIAOMI_BIOMETRICS_FINGERPRINT,IMPL_VER,V2)
+$(call soong_config_set,mivi_BIOMETRICS_FINGERPRINT,IMPL_VER,V2)
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint-service.xiaomi
+    android.hardware.biometrics.fingerprint-service.mivi
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
@@ -266,7 +266,7 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors-service.xiaomi-multihal \
+    android.hardware.sensors-service.mivi-multihal \
     sensors.dynamic_sensor_hal
 
 PRODUCT_COPY_FILES += \
@@ -281,7 +281,7 @@ PRODUCT_COPY_FILES += \
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
-    hardware/xiaomi \
+    hardware/mivi \
     vendor/qcom/opensource/usb/etc
 
 # Telephony
@@ -303,11 +303,11 @@ PRODUCT_PACKAGES += \
     telephony-ext
 
 PRODUCT_PACKAGES += \
-    xiaomi-telephony-stub
+    mivi-telephony-stub
 
 PRODUCT_BOOT_JARS += \
     telephony-ext \
-    xiaomi-telephony-stub
+    mivi-telephony-stub
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.cdma.xml \
@@ -383,4 +383,4 @@ PRODUCT_PACKAGES += \
     firmware_wlanmdsp.otaupdate_symlink
 
 # Vendor
-$(call inherit-product, vendor/xiaomi/flame/flame-vendor.mk)
+$(call inherit-product, vendor/mivi/mvnoe/mvnoe-vendor.mk)

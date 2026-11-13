@@ -1,1 +1,1 @@
-require board=parrot|flame
+require board=parrot|mvnoe

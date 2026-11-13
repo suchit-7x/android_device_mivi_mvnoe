@@ -1,4 +1,4 @@
-# All blobs from flame-user 16 BP2A.250605.031.A3 OS3.0.303.0.WGUINXM release-keys, unless pinned
+# All blobs from qssi_64-user 16 BQ2A.260305.002 261010 release-keys, unless pinned
 
 # ACDB
 vendor/etc/acdbdata/nn_ns_models/fai__2.0.0_0.1__3.0.0_0.0__eai_1.36_enpu2.pmd

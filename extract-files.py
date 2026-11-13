@@ -20,7 +20,7 @@ from extract_utils.main import (
 namespace_imports = [
     'hardware/qcom-caf/sm8450-6.6',
     'hardware/qcom-caf/wlan',
-    'hardware/xiaomi',
+    'hardware/mivi',
     'vendor/qcom/opensource/commonsys/display',
     'vendor/qcom/opensource/commonsys-intf/display',
     'vendor/qcom/opensource/dataservices',
@@ -116,12 +116,11 @@ blob_fixups: blob_fixups_user_type = {
 
 
 module = ExtractUtilsModule(
-    'flame',
-    'xiaomi',
+    'mvnoe',
+    'mivi',
     blob_fixups=blob_fixups,
     lib_fixups=lib_fixups,
     namespace_imports=namespace_imports,
-    add_firmware_proprietary_file=True,
 )
 
 if __name__ == '__main__':
