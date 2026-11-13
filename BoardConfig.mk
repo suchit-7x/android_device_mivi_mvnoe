@@ -81,6 +81,7 @@ BOARD_BOOTCONFIG := \
     androidboot.serialconsole=0 \
     androidboot.usbcontroller=a600000.dwc3 \
     androidboot.load_modules_parallel=true \
+    androidboot.selinux=permissive \
 	androidboot.vendor.qspa=true
 
 # Kernel (prebuilt)
